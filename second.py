@@ -16,8 +16,7 @@ def cislo_text(cislo):
         jednotky = cislo % 10
 
         desitky = (cislo - jednotky)//10
-        print (desitky)
-        print (jednotky)
+        
         if(jednotky == 0):
             return (des[desitky])
         else:
