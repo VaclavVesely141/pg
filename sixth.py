@@ -3,12 +3,7 @@ import requests
 
 
 def download_url_and_get_all_hrefs(url):
-    """
-    Funkce stahne url predanou v parametru url pomoci volani response = requests.get(),
-    zkontroluje navratovy kod response.status_code, ktery musi byt 200,
-    pokud ano, najdete ve stazenem obsahu stranky response.content vsechny vyskyty
-    odkazu a z nich nactete url, ktere vratite jako seznam pomoci return
-    """
+    
 
     response = requests.get(url)
 
@@ -24,7 +19,7 @@ def download_url_and_get_all_hrefs(url):
         if href.startswith("http"):
             hrefs.append(href)
     for href in hrefs:
-        print(f"Odkaz: {href}")
+        print(f"Odkaz na stranku: {href}")
     return hrefs
 
 if __name__ == "__main__":
