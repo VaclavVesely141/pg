@@ -1,8 +1,11 @@
 def bin_to_dec(binarni_cislo):
-    # funkce spocita hodnotu predavaneho binarniho cisla (binarni_cislo muze byt str i int!!!)
-    # 111 -> 7
-    # "101" -> 5
-    return 0
+    binarni_cislo = str(binarni_cislo)
+    vysledek = 0
+
+    for cislice in binarni_cislo:
+        vysledek = vysledek * 2 + int(cislice)
+
+    return vysledek
 
 
 def test_bin_to_dec():
