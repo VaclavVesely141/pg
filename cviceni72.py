@@ -1,3 +1,4 @@
+import json
 class InvalidData(Exception):
     pass
 
@@ -42,12 +43,12 @@ class Osoba:
             raise InvalidData("Email musí obsahovat zavináč a tečku.")
 
     @classmethod
-    def load_json_data(cls, json_data):
-        osoby = []
-        for data in json_data:
-            osoba = cls(data["jmeno"], data["telefon"], data["email"])
-            osoby.append(osoba)
-        return osoby
+    def json_data(cls, data):
+        if not isinstance(data, list):
+            raise InvalidData("Data musí být seznam.")
+        if "jmeno" not in data or "telefon" not in data or "email" not in data:
+            raise InvalidData("Data musí obsahovat jméno, telefon a email.")
+        return [cls(item["jmeno"], item["telefon"], item["email"]) for item in data]
 
 if __name__ == "__main__":
     #o = Osoba("Jan Novák", "123456789", "jan@novak.cz")
@@ -56,4 +57,9 @@ if __name__ == "__main__":
     #o.email = "michal@mazgal.cz" #kontrola ze obsahuje jen cisla, pismena, zavinac a tecku
     #o.vypsat_info()
     osoby = []
-    print(osoby)
+    with open("osoby.json", "r") as f:
+        data = json.loads(f.read())
+        for record in data:
+            osoby.append(Osoba(Osoba.json_data(record)))
+        print(osoby)
+    
